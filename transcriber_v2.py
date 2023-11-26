@@ -114,9 +114,18 @@ class YouTubeTranscriber(QWidget):
         if client == None:
             if self.openai_persistent_api_key.text() != "":
                 client = OpenAI(api_key=self.openai_persistent_api_key.text())
+            else:
+                client = None
+        elif self.openai_persistent_api_key.text() == "":
+            client = None
+
         if novelToken == None:
             if self.novelai_persistent_api_key.text() != "":
                 novelToken = self.novelai_persistent_api_key.text()
+            else:
+                novelToken = None
+        elif self.novelai_persistent_api_key.text() == "":
+            novelToken = None
 
 
         video_url = self.url_input.text()
