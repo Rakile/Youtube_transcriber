@@ -1,0 +1,5 @@
+novelai-api
+openai
+openai-whisper
+PySide6
+pytube
