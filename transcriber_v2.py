@@ -152,7 +152,11 @@ class YouTubeTranscriber(QWidget):
             audio = whisper.load_audio("recording.mp3")
             audio = whisper.pad_or_trim(audio)
             # make log-Mel spectrogram and move to the same device as the model
-            mel = whisper.log_mel_spectrogram(audio).to(self.model.device)
+            if modelName == "large":
+                mel = whisper.log_mel_spectrogram(audio, n_mels=128).to(self.model.device)
+            else:
+                mel = whisper.log_mel_spectrogram(audio).to(self.model.device)
+
             # detect the spoken language
             _, probs = self.model.detect_language(mel)
             lang = max(probs, key=probs.get)
